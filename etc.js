@@ -19,8 +19,8 @@ require('dotenv').config();
   await page.waitForSelector('#landing_navigation > div > div:nth-child(3) > div > ul.navi_login > a:nth-child(1) > li')
   await page.click('#landing_navigation > div > div:nth-child(3) > div > ul.navi_login > a:nth-child(1) > li')
   await page.waitForSelector('#id')
-  await page.type('#id', 'hanpel')
-  await page.type('#pw', 'hp08140814')
+  await page.type('#id', process.env.TRASS_ID)
+  await page.type('#pw', process.env.TRASS_PW)
   await page.keyboard.press('Enter', {
     delay: 500
   })
