@@ -1,3 +1,6 @@
+const { google } = require('googleapis');
+require('dotenv').config();
+
 const creden = {
     "installed": {
         "client_id": process.env.CLIENT_ID,
@@ -32,4 +35,45 @@ const creden = {
         oAuth2Client.setCredentials(toke);
         callback(oAuth2Client, param2);
     }
-  
+
+    function inputTrass(auth, _inputData) {
+        const sheets = google.sheets({
+          version: 'v4',
+          auth
+        });
+        const mySpreadSheetId = '1TdrbKRpmPpkL5LY_U0CWp7r8V0DhIV8KbayL-nx3-J0';
+        const sheetName = 'input';
+      
+        sheets.spreadsheets.values.get({
+          spreadsheetId: mySpreadSheetId,
+          range: `${sheetName}!A:A`,
+        }, (err, res) => {
+          if (err)
+            return console.log('The API returned an error: ' + err);
+          const data = res.data.values;
+          let i = data.length;
+          console.log(i);
+      
+          sheets.spreadsheets.values.update({
+            spreadsheetId: mySpreadSheetId,
+            range: `${sheetName}!A${i + 1}`,
+            valueInputOption: "USER_ENTERED",
+            resource: {
+              majorDimension: "ROWS",
+              values: [
+                //[date, wri, amount, content]
+                _inputData
+              ]
+            }
+          }, (err, result) => {
+            if (err) {
+              // Handle error
+              console.log(err);
+            } else {
+              console.log('%d cells updated.', result.updatedCells);
+            }
+          });
+        });
+      };
+
+    module.exports={creden, toke, authorize, inputTrass};

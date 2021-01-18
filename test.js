@@ -1,9 +1,8 @@
-const puppeteer = require('puppeteer');
+const { puppeteer } = require('puppeteer');
+const { selectMonth } = require('./basicInformation');
+const { creden, toke, authorize, inputTrass } = require('./googleAuth')
+require('dotenv').config();
 
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('https://www.google.com');
-  // other actions...
-  await browser.close();
-})();
+const e = [1, 1, 1, 1, 1, 1]
+console.log(selectMonth)
+authorize(creden, e, inputTrass);

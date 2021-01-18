@@ -316,7 +316,6 @@ sheets.spreadsheets.values.get({
     for (var d = 1; d < z; d++) {
       if (a[d] === month) {
         var e = await [hs_edit[clickDet[k][0]], country_edit[clickDet[k][1]], addDet_edit[clickDet[k][2]], a[d], b[d], c[d]]
-        //await finalData.push(e);
         await authorize(creden, e, inputTrass)
       }
     }
