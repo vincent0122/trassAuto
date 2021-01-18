@@ -4,6 +4,8 @@ const readline = require('readline');
 const {google} = require('googleapis');
 const { SSL_OP_CIPHER_SERVER_PREFERENCE } = require('constants');
 require('dotenv').config();
+const selectMonth = require('./basicInformation');
+
 
 const creden = {
   "installed": {
@@ -314,7 +316,7 @@ sheets.spreadsheets.values.get({
     }
 
     for (var d = 1; d < z; d++) {
-      if (a[d] === '         11월') {
+      if (a[d] === selectMonth) {
         var e = await [hs_edit[clickDet[k][0]], country_edit[clickDet[k][1]], addDet_edit[clickDet[k][2]], a[d], b[d], c[d]]
         //await finalData.push(e);
         await authorize(creden, e, inputTrass)
@@ -329,14 +331,3 @@ sheets.spreadsheets.values.get({
   
 
 })();
-
-  
-
- 
-
-// * 중량이 10,000이 넘는 것만 array에 집어넣는ㄴ다
-// array에 넣을 것은 hs code, 국가, 지역
-// 각각을 클릭하게 하고 조회로 고고
-// 2020년 클릭
-// 드래그
-// 복붙

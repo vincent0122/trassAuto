@@ -4,6 +4,7 @@ const readline = require('readline');
 const {google} = require('googleapis');
 const { SSL_OP_CIPHER_SERVER_PREFERENCE } = require('constants');
 require('dotenv').config();
+const selectMonth = require('./basicInformation');
 
 const creden = {
   "installed": {
@@ -93,7 +94,7 @@ sheets.spreadsheets.values.get({
     height: 1000,
   })
 
-  var month = '         11월'
+  var month = selectMonth;
   await page.goto('https://www.bandtrass.or.kr/index.do');
   await page.waitForSelector('#landing_navigation > div > div:nth-child(3) > div > ul.navi_login > a:nth-child(1) > li')
   await page.click('#landing_navigation > div > div:nth-child(3) > div > ul.navi_login > a:nth-child(1) > li')
