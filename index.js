@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
-const selectMonth = require('./basicInformation');
-const { creden, toke, authorize } = require('./googleAuth')
-const inputTrass = require('./googleInput')
+const sMonth = require('./basicInformation');
+const { google } = require('googleapis');
+const { creden, toke, authorize, inputTrass } = require('./googleAuth')
 require('dotenv').config();
 
 (async () => {
@@ -19,8 +19,8 @@ require('dotenv').config();
   await page.waitForSelector('#landing_navigation > div > div:nth-child(3) > div > ul.navi_login > a:nth-child(1) > li')
   await page.click('#landing_navigation > div > div:nth-child(3) > div > ul.navi_login > a:nth-child(1) > li')
   await page.waitForSelector('#id')
-  await page.type('#id', 'hanpel')
-  await page.type('#pw', 'hp08140814')
+  await page.type('#id', process.env.TRASS_ID)
+  await page.type('#pw', process.env.TRASS_PW)
   await page.keyboard.press('Enter', {
     delay: 500
   })
@@ -128,25 +128,6 @@ require('dotenv').config();
   country_edit = []
   addDet_edit = []
 
-  /*   for(var i = 0; i < hs.length; i++){
-      if(hs[i] != hs[i+1]){
-        difData.push(i+1)
-      }
-    } */
-
-
-  /* for(var i = 0; i < difData.length; i++){
-   var a = await country.slice(difData[i-1], difData[i])
-   var a = await Array.from(new Set(a))
-   var a = await a.sort()
-   await country_edit.push(a)
-
-   var b = await addDet.slice(difData[i-1], difData[i])
-   var b = await Array.from(new Set(b))
-   var b = await b.sort()
-   await addDet_edit.push(b)
-  } */
-
   country_edit = await Array.from(new Set(country))
   addDet_edit = await Array.from(new Set(addDet))
   hs_edit = await Array.from(new Set(hs))
@@ -237,10 +218,8 @@ require('dotenv').config();
     }
 
     for (var d = 1; d < z; d++) {
-      if (a[d] === selectMonth) {
+      if (a[d] === sMonth) {
         var e = await [hs_edit[clickDet[k][0]], country_edit[clickDet[k][1]], addDet_edit[clickDet[k][2]], a[d], b[d], c[d]]
-        console.log(e);
-        console.log(a[d]);
         await authorize(creden, e, inputTrass)
       }
     }

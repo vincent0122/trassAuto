@@ -1,10 +1,10 @@
 {
   "name": "trassauto",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "pollen.js",
   "scripts": {
-    "test": "node index.js",
-    "start": "node index.js"
+    "test": "node pollen.js",
+    "start": "node pollen.js"
   },
   "author": "vinc",
   "license": "ISC",

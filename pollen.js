@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const selectMonth = require('./basicInformation');
+const sMonth = require('./basicInformation');
 const { google } = require('googleapis');
 const { creden, toke, authorize, inputTrass } = require('./googleAuth')
 require('dotenv').config();
@@ -15,7 +15,6 @@ require('dotenv').config();
     height: 1000,
   })
 
-  var month = selectMonth;
   await page.goto('https://www.bandtrass.or.kr/index.do');
   await page.waitForSelector('#landing_navigation > div > div:nth-child(3) > div > ul.navi_login > a:nth-child(1) > li')
   await page.click('#landing_navigation > div > div:nth-child(3) > div > ul.navi_login > a:nth-child(1) > li')
@@ -51,6 +50,7 @@ require('dotenv').config();
   hsCo2 = ["1212993000"];
    
   loca = ['광산','포천','울진','달성','안성','전주','증평','영월','세종'] 
+  
 
   async function hsCode(code) {
     await page2.type('#CustomText', code)
@@ -212,9 +212,8 @@ require('dotenv').config();
       }
     }
     
-
     for (var d = 1; d < z; d++) {
-      if (a[d] === month) {
+      if (a[d] === sMonth) {
         var e = await [hs_edit[clickDet[k][0]], country_edit[clickDet[k][1]], addDet_edit[clickDet[k][2]], a[d], b[d], c[d]]
         console.log(e);
         await authorize(creden, e, inputTrass)
